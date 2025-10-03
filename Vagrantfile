@@ -1,23 +1,22 @@
 Vagrant.configure("2") do |config|
-    #utilizaremos a Imagem bento ubuntu para o projeto
+    #using bento ubuntu iso 
   config.vm.box = "bento/ubuntu-22.04"
 
-    #setando o nome da vm que vai subir
+    #seting a vm name
   config.vm.hostname = "ProjCompNuvem2"
-    #sincroniza a pasta atual com a pasta em "/vagrant" dentro da vm que será criada
+    #syncronize actual folder with "/vagrant" file/directory inside vm
   config.vm.synced_folder ".", "/vagrant"
-    #só definindo um ip fixo para facilitar a comunicação
+    #just defining an ip to make the comunication easier
   config.vm.network "private_network", ip: "192.168.56.50"
 
-    #configurações da vm:
+    #configure the vm 
   config.vm.provider "virtualbox" do |vb|
-    # Suas configurações de hardware e GUI:
     vb.gui = true
-    vb.memory = "4096"  #alocando 4 GB de ram e 2 cpus, assim como proposta nas especificações
+    vb.memory = "4096"  #alocating 4 GB to RAM and 2 cpus, likely proposed in statement
     vb.cpus = 2
     vb.name = "ProjCompNuvem2"
   end
 
-    #roda o script de inicialização, instalando as dependencias para o projeto
+    #runs the initial script, installing dependences to project
   config.vm.provision "shell", path: "initialscript.sh"
 end
